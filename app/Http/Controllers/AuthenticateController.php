@@ -23,15 +23,7 @@ class AuthenticateController extends Controller
     try {
         $admin = admin::where('name',$urse)->where('pass',$pass)->firstOrFail();
         $request->session()->put('id',$admin->id);
-        // $userlogin = Session::get('userlogin');
-        // if(is_null($userlogin)){
-        //     Session::put('userlogin',[
-        //         'user' => $urse
-        //     ]);
-        //     return true;
-        // }
-        // dd($userlogin);
-
+        $request->session()->put('name', $admin->name);
         return Redirect::route('dashboard');
 
 

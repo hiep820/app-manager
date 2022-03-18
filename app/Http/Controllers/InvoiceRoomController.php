@@ -21,7 +21,7 @@ class InvoiceRoomController extends Controller
         // dd($user);
         $search = $request->get('search');
         $listhddv= invoiceroom::join("dich_vu", "hoa_don_dv.id_dv", "=", "dich_vu.id_dv")
-        ->where("create_at", "like", "%$search%")
+        ->where("create_at","like","%$search%")
         ->paginate(10);
         return view('invoice_room.index', [
             'listhddv' => $listhddv,
@@ -53,12 +53,11 @@ class InvoiceRoomController extends Controller
     {
         $name = $request->get('dichvu');
         $soluong = $request->get('soluong');
-        $createat = $request->get('createat');
+        $createat = $request->get('creataat');
         $data = new invoiceroom();
         $data->id_dv=$name;
         $data->so_luong=$soluong;
         $data -> create_at=$createat;
-
         $data->save();
         return redirect()->route('invoice_room.index');
     }
@@ -82,7 +81,12 @@ class InvoiceRoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dichvu = dich_vu::all();
+        $listhddv= invoiceroom::join("dich_vu", "hoa_don_dv.id_dv", "=", "dich_vu.id_dv")->find($id);
+        return view('invoice_room.edit',[
+            "dichvu" => $dichvu,
+            'listhddv' => $listhddv,
+        ]);
     }
 
     /**
@@ -94,7 +98,15 @@ class InvoiceRoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->get('dichvu');
+        $soluong = $request->get('soluong');
+        $createat = $request->get('creataat');
+        $data =  invoiceroom::find($id);
+        $data->id_dv=$name;
+        $data->so_luong=$soluong;
+        $data -> create_at=$createat;
+        $data->save();
+        return redirect()->route('invoice_room.index');
     }
 
     /**
@@ -105,6 +117,7 @@ class InvoiceRoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        invoiceroom::where('id_hddv', $id)->delete();
+        return redirect()->back();
     }
 }

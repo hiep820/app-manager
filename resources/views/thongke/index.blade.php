@@ -12,8 +12,6 @@
                 </div>
             </div>
             <form action="">
-
-
                 Tìm kiếm
                 <input type="text" value="{{$search}}" name="search">
                 <button>ok</button>
@@ -26,11 +24,10 @@
             <table class="table table-bordered">
                 <tr>
                     <th>No</th>
-                    <th>phòng nghỉ</th>
-                    <th>người tạo</th>
-                    <th>giờ bắt đầu</th>
-                    <th>Thanh toán</th>
-                    <th> thời gian tạo</th>
+                    <th>tên sản dịch vụ</th>
+                    <th>tổng số lượng</th>
+                    <th>tổng tiền</th>
+
 
                     <th width="280px">Chức năng</th>
                 </tr>

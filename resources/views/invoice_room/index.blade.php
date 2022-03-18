@@ -15,7 +15,7 @@
 
 
                 Tìm kiếm
-                <input type="text" value="{{$search}}" name="search">
+                <input type="month" value="{{$search}}" name="search">
                 <button>ok</button>
             </form>
             @if ($message = Session::get('success'))

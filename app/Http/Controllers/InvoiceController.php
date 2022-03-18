@@ -58,6 +58,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $name = $request->get('phong');
+        $thanhtoan = $request->get('thanhtoan');
         $user= $request->get('user');
         $giobt = $request->get('bt');
         $tao = $request->get('tao');
@@ -65,6 +66,7 @@ class InvoiceController extends Controller
         $data->id_phong=$name;
         $data->id_user=$user;
         $data -> gio_bat_dau=$giobt;
+        $data->thanh_toan=$thanhtoan;
         $data->tg_tao=$tao;
         $data->save();
         return redirect()->route('invoice.index');
@@ -112,11 +114,13 @@ class InvoiceController extends Controller
         $name = $request->get('phong');
         $user= $request->get('user');
         $giobt = $request->get('bt');
+        $thanhtoan = $request->get('thanhtoan');
         $tao = $request->get('tao');
         $data =  hoa_don::find($id);
         $data->id_phong=$name;
         $data->id_user=$user;
         $data -> gio_bat_dau=$giobt;
+        $data->thanh_toan=$thanhtoan;
         $data->tg_tao=$tao;
         $data->save();
         return redirect()->route('invoice.index');
