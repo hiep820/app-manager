@@ -31,6 +31,12 @@
                     @endforeach
                 </select><br>
                 Giờ bắt đầu: <input type="datetime" name="bt" value="{{ $hoaDon->gio_bat_dau }}"><br>
+                thanh toán:
+                <input type="radio" name="thanhtoan" value = "0" @if ($hoaDon->thanh_toan== 0)
+                    checked
+                @endif>Chưa thanh toán<input type="radio" name="quyen" value = "1" @if ($hoaDon->quyen== 1)
+                checked
+            @endif>đã thanh toán<br>
                 thời gian tạo : <input type="datetime" name="tao" value="{{ $hoaDon->tg_tao }}"><br>
                 <button>Cập nhật</button>
             </form>

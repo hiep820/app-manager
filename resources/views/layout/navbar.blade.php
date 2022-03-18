@@ -24,13 +24,10 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{-- {{ Auth::user()->name }} --}}
-                        dd('slfds')
                         <li>
                             <a href="{{ route('logout') }}" class="text-danger">
                                 <i class="pe-7s-close-circle"></i>
-
-                                Log out
+                                {{ Session::get('name') }}
                             </a>
                         </li>
                     </ul>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2022 at 10:46 AM
+-- Generation Time: Mar 18, 2022 at 06:07 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.15
 
@@ -69,15 +69,19 @@ CREATE TABLE `hoa_don` (
   `id_phong` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `gio_bat_dau` datetime NOT NULL,
-  `tg_tao` datetime NOT NULL
+  `tg_tao` datetime NOT NULL,
+  `thanh_toan` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hoa_don`
 --
 
-INSERT INTO `hoa_don` (`id_hd`, `id_phong`, `id_user`, `gio_bat_dau`, `tg_tao`) VALUES
-(1, 1, 2, '2022-08-08 02:10:00', '2022-08-08 04:10:00');
+INSERT INTO `hoa_don` (`id_hd`, `id_phong`, `id_user`, `gio_bat_dau`, `tg_tao`, `thanh_toan`) VALUES
+(1, 1, 1, '2022-08-08 02:10:00', '2022-08-08 04:10:00', 0),
+(3, 1, 2, '2222-12-12 09:09:00', '2022-03-16 00:00:00', 1),
+(5, 1, 1, '2022-08-08 04:15:00', '2022-03-22 00:00:00', 1),
+(6, 3, 2, '2022-08-08 04:15:00', '2022-03-07 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -88,9 +92,7 @@ INSERT INTO `hoa_don` (`id_hd`, `id_phong`, `id_user`, `gio_bat_dau`, `tg_tao`) 
 CREATE TABLE `hoa_don_ct` (
   `id_hdct` int(11) NOT NULL,
   `id_hd` int(11) NOT NULL,
-  `id_dich_vu` int(11) NOT NULL,
   `gio_ket_thuc` datetime NOT NULL,
-  `thanh_toan` tinyint(4) NOT NULL,
   `gio_tao` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,8 +100,8 @@ CREATE TABLE `hoa_don_ct` (
 -- Dumping data for table `hoa_don_ct`
 --
 
-INSERT INTO `hoa_don_ct` (`id_hdct`, `id_hd`, `id_dich_vu`, `gio_ket_thuc`, `thanh_toan`, `gio_tao`) VALUES
-(2, 1, 2, '2022-08-08 04:15:00', 0, '2022-08-08 04:15:00');
+INSERT INTO `hoa_don_ct` (`id_hdct`, `id_hd`, `gio_ket_thuc`, `gio_tao`) VALUES
+(2, 1, '2022-08-08 04:15:00', '2022-08-08 04:15:00');
 
 -- --------------------------------------------------------
 
@@ -321,7 +323,6 @@ ALTER TABLE `hoa_don`
 --
 ALTER TABLE `hoa_don_ct`
   ADD PRIMARY KEY (`id_hdct`),
-  ADD KEY `id_dich_vu` (`id_dich_vu`),
   ADD KEY `id_hd` (`id_hd`);
 
 --
@@ -409,7 +410,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `hoa_don`
 --
 ALTER TABLE `hoa_don`
-  MODIFY `id_hd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_hd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `hoa_don_ct`
@@ -421,7 +422,7 @@ ALTER TABLE `hoa_don_ct`
 -- AUTO_INCREMENT for table `hoa_don_dv`
 --
 ALTER TABLE `hoa_don_dv`
-  MODIFY `id_hddv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_hddv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hoa_don _dv_ct`
@@ -486,7 +487,6 @@ ALTER TABLE `hoa_don`
 -- Constraints for table `hoa_don_ct`
 --
 ALTER TABLE `hoa_don_ct`
-  ADD CONSTRAINT `hoa_don_ct_ibfk_1` FOREIGN KEY (`id_dich_vu`) REFERENCES `dich_vu` (`id_dv`),
   ADD CONSTRAINT `hoa_don_ct_ibfk_2` FOREIGN KEY (`id_hd`) REFERENCES `hoa_don` (`id_hd`);
 
 --
