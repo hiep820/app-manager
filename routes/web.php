@@ -31,4 +31,5 @@ Route::middleware([CheckLogin::class])->group(function (){
     Route::resource('room_for_rest',App\Http\Controllers\PhongNghiController::class);
     Route::resource('invoice',App\Http\Controllers\InvoiceController::class);
     Route::resource('invoice_room',App\Http\Controllers\InvoiceRoomController::class);
+    Route::resource('detailed_invoice',App\Http\Controllers\DetailedInvoiceController::class);
 });

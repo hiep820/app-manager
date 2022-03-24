@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -36,6 +37,7 @@ class AuthenticateController extends Controller
         $request->session()->flush();
         return Redirect::route('login');
     }
+
 }
 
 

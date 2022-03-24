@@ -17,6 +17,7 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
+        $ngay = $request->get('ngay');
         $phongnghi= phongnghi::all();
         $user = admin::all();
         $query = hoa_don::query();
@@ -25,12 +26,16 @@ class InvoiceController extends Controller
         if($search != NULL) {
             $query->where("phong_nghi.so_phong", "like", "%$search%");
         }
+        if($ngay != NULL) {
+            $query->where("hoa_don.tg_tao", "like", "%$ngay%");
+        }
         $invoice=$query->paginate(10);
         return view('invoice.index', [
             'user' => $user,
             'phongnghi'=>$phongnghi,
             'invoice'=>$invoice,
             'search' => $search,
+            'ngay'=>$ngay,
         ]);
     }
 
