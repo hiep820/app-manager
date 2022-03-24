@@ -14,10 +14,12 @@
             <form action="">
 
 
-                Tìm kiếm
-                <input type="text" value="{{$search}}" name="search">
-                <button>ok</button>
-            </form>
+                Số phòng
+                <input type="text" value="{{$search}}" name="search">&emsp;&emsp;
+                Ngày tạo
+                <input type="text" value="{{$ngay}}" name="ngay">&emsp;&emsp;
+                &emsp;  <button>Tìm kiếm</button>
+            </form><br>
             @if ($message = Session::get('success'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>

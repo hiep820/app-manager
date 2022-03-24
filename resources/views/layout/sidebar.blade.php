@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('detailed_invoice.index') }}">
                     <i class="pe-7s-albums"></i>
                     <p>hóa đơn chi tiết phòng nghỉ</p>
                 </a>
@@ -66,12 +66,16 @@
                     <p>Quản lý hóa đơn dịch vụ</p>
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="pe-7s-albums"></i>
-                    <p>hóa đơn chi tiết dịch vụ</p>
-                </a>
-            </li>
+
+           @can('is-admin')
+           <li>
+            <a href="#">
+                <i class="pe-7s-albums"></i>
+                <p>thống kê</p>
+            </a>
+        </li>
+
+           @endcan
 
 
         </ul>

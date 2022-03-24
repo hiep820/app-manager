@@ -14,7 +14,7 @@ class phongnghi extends Model
     protected $guarded = ['id_room'];
 
     public function loaiphong(){
-        return $this->belongsTo('App\Models\loai_phong','id','id');
+        return $this->belongsTo('App\Models\phongloai','id','id');
     }
 
     public function  getStatusNameAttribute()

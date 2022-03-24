@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $value ->id}}</td>
                     <td>{{ $value->loai }}</td>
-                    <td>{{ $value->gia}}₫</td>
+                    <td>{{ $value->gia}}₫/h</td>
                     <td>
                         <form action="{{ route('kind_of_room.destroy', $value->id)}}"  method="post">
                         <a class="btn btn-info" href="#"><i class="fa fa-tripadvisor"></i></a>

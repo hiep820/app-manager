@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hoa_don;
+use App\Models\hoa_don_ct;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DetailedInvoiceController extends Controller
@@ -11,9 +14,34 @@ class DetailedInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->get('search');
+        $invoice= hoa_don::join("phong_nghi", "hoa_don.id_phong", "=", "phong_nghi.id_room")
+        ->join("user", "hoa_don.id_user", "=", "user.id");
+        $query = hoa_don_ct::query();
+        $query->join("hoa_don", "hoa_don_ct.id_hd", "=", "hoa_don.id_hd")
+        ->join("phong_nghi", "hoa_don.id_phong", "=", "phong_nghi.id_room")
+        ->join("phongloai", "phong_nghi.loai_phong", "=", "phongloai.id")
+        ->join("user", "hoa_don.id_user", "=", "user.id");
+        if($search != NULL) {
+            $query->where("phong_nghi.so_phong", "like", "%$search%");
+        };
+
+
+
+
+        $sogiay = (strtotime(date('H:i:s', strtotime($query->max('hoa_don_ct.gio_ket_thuc')))) - strtotime(date('H:i:s', strtotime($query->max('hoa_don.gio_bat_dau')))));
+        $sogio = $sogiay/60/60;
+        $sotien = 100000+(($sogio*$query->max('phongloai.gia'))-$query->max('phongloai.gia'));
+        $invoicedetailed=$query->paginate(10);
+        return view('detailed_invoice.index', [
+            'sotien' =>$sotien,
+            'sogio' =>$sogio,
+            'invoicedetailed'=>$invoicedetailed,
+            'invoice'=>$invoice,
+            'search' => $search,
+        ]);
     }
 
     /**
@@ -23,7 +51,12 @@ class DetailedInvoiceController extends Controller
      */
     public function create()
     {
-        //
+
+        $listHD = hoa_don::all();
+        return view('detailed_invoice.create', [
+
+            "listHD"=>$listHD
+        ]);
     }
 
     /**
@@ -34,7 +67,15 @@ class DetailedInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hoadon = $request->get('hoadon');
+        $ketthuc = $request->get('ketthuc');
+        $tao = $request->get('tao');
+        $data = new hoa_don_ct();
+        $data->id_hd=$hoadon;
+        $data->gio_ket_thuc=$ketthuc;
+        $data->gio_tao=$tao;
+        $data->save();
+        return redirect()->route('detailed_invoice.index');
     }
 
     /**
@@ -45,7 +86,7 @@ class DetailedInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +97,8 @@ class DetailedInvoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = hoa_don_ct::find($id);
+        return view('detailed_invoice.edit',compact('data'));
     }
 
     /**
@@ -68,7 +110,15 @@ class DetailedInvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $hoadon = $request->get('hoadon');
+        $ketthuc = $request->get('ketthuc');
+        $tao = $request->get('tao');
+        $data =  hoa_don_ct::find($id);
+        $data->id_hd=$hoadon;
+        $data->gio_ket_thuc=$ketthuc;
+        $data->gio_tao=$tao;
+        $data->save();
+        return redirect()->route('detailed_invoice.index');
     }
 
     /**
@@ -79,6 +129,7 @@ class DetailedInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        hoa_don_ct::where('id_hdct', $id)->delete();
+        return redirect()->back();
     }
 }

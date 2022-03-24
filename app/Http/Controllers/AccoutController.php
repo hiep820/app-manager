@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccoutController extends Controller
 {
@@ -114,4 +115,5 @@ class AccoutController extends Controller
         admin::where('id', $id)->delete();
         return redirect()->back();
     }
+
 }
