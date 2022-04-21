@@ -22,7 +22,8 @@ class InvoiceRoomController extends Controller
         $search = $request->get('search');
         $listhddv= invoiceroom::join("dich_vu", "hoa_don_dv.id_dv", "=", "dich_vu.id_dv")
         ->where("create_at","like","%$search%")
-        ->paginate(10);
+        ->orderBy('id_hddv','DESC')
+        ->paginate(5);
         return view('invoice_room.index', [
             'listhddv' => $listhddv,
             'search' => $search,

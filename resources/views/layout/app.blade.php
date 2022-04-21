@@ -20,6 +20,8 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="{{ asset('assets') }}/css/demo.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!--     Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -98,5 +100,25 @@
 
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets') }}/js/demo.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $('#bnte').click(function(){
+            var _token =$('input[name="_token"]').val();
+            var form_data = $('#datepicker').val();
+            var to_data = $('#datepicker2').val();
+
+            $.ajax({
+                url:"{{ url('thongke') }}",
+                method:"GET",
+                dataType:"JSON",
+                data:{form_date:form_data,to_date:to_data,_token:_token},
+                success:function(data){
+                    chart.setData(data);
+                }
+
+            })
+         });
+    </script>
 
 </html>

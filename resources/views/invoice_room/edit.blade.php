@@ -23,7 +23,7 @@
                 </select><br>
                 Số lượng : <input type="text" name="soluong" value="{{ $listhddv->so_luong }}"><br>
 
-                Thời gian tạo : <input type="datetime" name="creataat" value="{{ $listhddv->create_at }}"><br>
+                Thời gian tạo : <input type="datetime-local" name="creataat" value="{{ $listhddv->create_at }}"><br>
                 <button>Cập nhật</button>
             </form>
         </div>

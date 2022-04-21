@@ -19,9 +19,9 @@
                     @endforeach
                 </select><br><br>
                 người tạo :<input type="text" name="user"value= "{{ Session::get('id') }}"readonly><br><br>
-                giờ bắt đầu: <input type="datetime" name="bt" required value="0000-00-00 00:00:00"><br><br>
+                giờ bắt đầu: <input type="datetime-local" name="bt" required value="0000-00-00 00:00:00"><br><br>
                 Thanh toán: <input type="radio" name="thanhtoan" value="0" >Chưa thanh toán <input type="radio" name="thanhtoan" value="1">đã thanh toán <br>
-                thời gian tạo : <input type="date" name="tao" required ><br><br>
+                thời gian tạo : <input type="datetime-local" name="tao" required ><br><br>
                 <button>Ok</button>
             </form>
         </div>

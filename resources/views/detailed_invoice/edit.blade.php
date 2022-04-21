@@ -13,8 +13,8 @@
                 @method('PUT')
                 @csrf
                 ID hóa đơn :<input type="text" name="hoadon" value="{{ $data->id_hd }}" /><br>
-                Giờ kết thúc: <input type="datetime" name="ketthuc" value="{{ $data->gio_ket_thuc }}"><br>
-                thời gian tạo : <input type="date" name="tao" value="{{ $data->gio_tao }}"><br>
+                Giờ kết thúc: <input  type="datetime-local" name="ketthuc" value="{{ $data->gio_ket_thuc }}"><br>
+                thời gian tạo : <input type="datetime-local" name="tao" value="{{ $data->gio_tao }}"><br>
                 <button>Cập nhật</button>
             </form>
         </div>

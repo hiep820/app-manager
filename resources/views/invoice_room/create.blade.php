@@ -20,7 +20,7 @@
                 </select><br><br>
                 Số lượng: <input type="number" name="soluong" required><br><br>
 
-                Thời gian tạo: <input type="datetime" name="creataat" required value="0000-00-00 00:00:00"><br><br>
+                Thời gian tạo: <input type="datetime-local" name="creataat" required value="0000-00-00 00:00:00"><br><br>
 
                 <button>Ok</button>
             </form>

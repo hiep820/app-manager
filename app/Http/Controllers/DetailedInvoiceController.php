@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\hoa_don;
 use App\Models\hoa_don_ct;
+use App\Models\phongnghi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,11 @@ class DetailedInvoiceController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
+        $phongnghi = phongnghi::all();
         $invoice= hoa_don::join("phong_nghi", "hoa_don.id_phong", "=", "phong_nghi.id_room")
         ->join("user", "hoa_don.id_user", "=", "user.id");
         $query = hoa_don_ct::query();
-        $query->join("hoa_don", "hoa_don_ct.id_hd", "=", "hoa_don.id_hd")
+        $data=$query->join("hoa_don", "hoa_don_ct.id_hd", "=", "hoa_don.id_hd")
         ->join("phong_nghi", "hoa_don.id_phong", "=", "phong_nghi.id_room")
         ->join("phongloai", "phong_nghi.loai_phong", "=", "phongloai.id")
         ->join("user", "hoa_don.id_user", "=", "user.id");
@@ -29,15 +31,14 @@ class DetailedInvoiceController extends Controller
         };
 
 
-
-
-        $sogiay = (strtotime(date('H:i:s', strtotime($query->max('hoa_don_ct.gio_ket_thuc')))) - strtotime(date('H:i:s', strtotime($query->max('hoa_don.gio_bat_dau')))));
-        $sogio = $sogiay/60/60;
-        $sotien = 100000+(($sogio*$query->max('phongloai.gia'))-$query->max('phongloai.gia'));
+        // $sogiay = (strtotime(date('Y-m-d H:i:s', strtotime($query->max('hoa_don_ct.gio_ket_thuc')))) - strtotime(date('Y-m-d H:i:s', strtotime($query->max('hoa_don.gio_bat_dau')))));
+        // $sogio = $sogiay/60/60;
         $invoicedetailed=$query->paginate(10);
+
         return view('detailed_invoice.index', [
-            'sotien' =>$sotien,
-            'sogio' =>$sogio,
+            // 'sotien' =>$sotien,
+            // 'sogio' =>$sogio,
+            'phongnghi' =>$phongnghi,
             'invoicedetailed'=>$invoicedetailed,
             'invoice'=>$invoice,
             'search' => $search,

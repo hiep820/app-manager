@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
-                        <h2>Tài khoản
+                        <h2>Loại Phòng
 
                                 <a class="btn btn-success" href="{{ route('kind_of_room.create') }}"> Thêm mới</a></h2>
                     </div>
@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $value ->id}}</td>
                     <td>{{ $value->loai }}</td>
-                    <td>{{ $value->gia}}₫/h</td>
+                    <td>{{number_format( $value->gia)}}₫/h</td>
                     <td>
                         <form action="{{ route('kind_of_room.destroy', $value->id)}}"  method="post">
                         <a class="btn btn-info" href="#"><i class="fa fa-tripadvisor"></i></a>

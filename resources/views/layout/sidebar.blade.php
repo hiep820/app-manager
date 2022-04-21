@@ -24,12 +24,14 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('account.index') }}">
-                    <i class="pe-7s-study"></i>
-                    <p>Quản lý tài khoản </p>
-                </a>
-            </li>
+            @if (Session::get('quyen'))
+                <li>
+                    <a href="{{ route('account.index') }}">
+                        <i class="pe-7s-study"></i>
+                        <p>Quản lý tài khoản </p>
+                    </a>
+                </li>
+            @endif
             <li>
                 <a href="{{ route('room_for_rest.index') }}">
                     <i class="pe-7s-study"></i>
@@ -54,30 +56,40 @@
                     <p>quản lý hóa đơn phòng nghỉ</p>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('detailed_invoice.index') }}">
                     <i class="pe-7s-albums"></i>
                     <p>hóa đơn chi tiết phòng nghỉ</p>
                 </a>
-            </li>
+            </li> --}}
             <li>
+            {{-- <li>
+                <a href="{{ route('room_detailed.index') }}">
+
+                    <i class="pe-7s-albums"></i>
+                    <p> Chi tiết phòng nghỉ</p>
+                </a>
+            </li>
+            <li> --}}
                 <a href="{{ route('invoice_room.index') }}">
                     <i class="pe-7s-albums"></i>
                     <p>Quản lý hóa đơn dịch vụ</p>
                 </a>
             </li>
-
-           @can('is-admin')
-           <li>
-            <a href="#">
-                <i class="pe-7s-albums"></i>
-                <p>thống kê</p>
-            </a>
-        </li>
-
-           @endcan
-
-
+            @if (Session::get('quyen'))
+                <li>
+                    <a href="{{ route('thongke') }}">
+                        <i class="pe-7s-albums"></i>
+                        <p>thống kê dịch vụ</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('thongke_pn.index') }}">
+                        <i class="pe-7s-albums"></i>
+                        <p>thống kê phòng nghỉ</p>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

@@ -12,16 +12,7 @@
                     </div>
                 </div>
             </div>
-            <form action="">
-                Tìm kiếm
-                <input type="text" value="{{ $search }}" name="search">
-                <button>ok</button>
-            </form>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+
             <table class="table table-bordered">
                 <tr>
                     <th>No</th>
@@ -39,29 +30,29 @@
 
                     <th width="280px">Chức năng</th>
                 </tr>
-                @foreach ($invoicedetailed as $value)
+
                     <tr>
-                        <td>{{ $value->id_hdct }}</td>
-                        <td>{{ $value->id_hd }}</td>
-                        <td>{{ $value->so_phong }}</td>
-                        <td>{{ $value->loai }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->gio_bat_dau }}</td>
-                        <td>{{ $value->gio_ket_thuc }}</td>
+                        <td>{{ $invoicedetailed->id_hdct }}</td>
+                        <td>{{ $invoicedetailed->id_hd }}</td>
+                        <td>{{ $invoicedetailed->so_phong }}</td>
+                        <td>{{ $invoicedetailed->loai }}</td>
+                        <td>{{ $invoicedetailed->name }}</td>
+                        <td>{{ $invoicedetailed->gio_bat_dau }}</td>
+                        <td>{{ $invoicedetailed->gio_ket_thuc }}</td>
                         <?php
-                        $sogiay = strtotime(date('Y-m-d H:i:s', strtotime($value->gio_ket_thuc))) - strtotime(date('Y-m-d H:i:s', strtotime($value->gio_bat_dau)));
+                        $sogiay = strtotime(date('Y-m-d H:i:s', strtotime($invoicedetailed->gio_ket_thuc))) - strtotime(date('Y-m-d H:i:s', strtotime($value->gio_bat_dau)));
                         $sogio = $sogiay / 60 / 60;
                         ?>
-                        <td><?php if(!$value->gio_ket_thuc==0){
+                        <td><?php if(!$invoicedetailed->gio_ket_thuc==0){
                            echo number_format($sogio, 1);
                         } ?></td>
-                        <td>{{ number_format(100000 + ($value->gia * $sogio - $value->gia), 0, '', ',') }} ₫</td>
-                        <td>{{ $value->gio_tao }}</td>
+                        <td>{{ number_format(100000 + ($invoicedetailed->gia * $sogio - $invoicedetailed->gia), 0, '', ',') }} ₫</td>
+                        <td>{{ $invoicedetailed->gio_tao }}</td>
                         <td>
-                            <form action="{{ route('detailed_invoice.destroy', $value->id_hdct) }}" method="post">
+                            <form action="{{ route('detailed_invoice.destroy', $invoicedetailed->id_hdct) }}" method="post">
                                 <a class="btn btn-info" href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a class="btn btn-primary"
-                                    href="{{ route('detailed_invoice.edit', $value->id_hdct) }}"><i
+                                    href="{{ route('detailed_invoice.edit', $invoicedetailed->id_hdct) }}"><i
                                         class="fa fa-pencil"></i></a>
                                 @csrf
                                 @method('DELETE')
@@ -69,11 +60,9 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+
             </table>
-            {{ $invoicedetailed->appends([
-                    'search' => $search,
-                ])->links() }}
+
         </div>
     </div>
 @endsection

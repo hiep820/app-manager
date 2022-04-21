@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\ThongKeController;
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckAdminn;
 use App\Http\Middleware\CheckLogin;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +25,7 @@ Route::post('/login-process', [AuthenticateController::class, 'loginProcess'])->
 Route::middleware([CheckLogin::class])->group(function (){
 
     Route::get('/', function () {
+
         return view('dashboard');
     })->name('dashboard');
     Route::get('/logout',[AuthenticateController::class, 'logout'])->name('logout');
@@ -32,4 +36,7 @@ Route::middleware([CheckLogin::class])->group(function (){
     Route::resource('invoice',App\Http\Controllers\InvoiceController::class);
     Route::resource('invoice_room',App\Http\Controllers\InvoiceRoomController::class);
     Route::resource('detailed_invoice',App\Http\Controllers\DetailedInvoiceController::class);
+    Route::GET('thongke',[ThongKeController::class,'index'])->name('thongke');
+    Route::resource('room_detailed',App\Http\Controllers\RoomDetailedController::class);
+    Route::resource('thongke_pn',App\Http\Controllers\ThongKePNController::class);
 });
