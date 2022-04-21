@@ -12,8 +12,8 @@
             <form action="{{ route('detailed_invoice.store') }}" method="post">
                 @csrf
                 ID hóa đơn :<input type="text" name="hoadon" required ><br><br>
-                Thời gian kết thúc : <input type="datetime" name="ketthuc" required ><br><br>
-                Thời gian tạo : <input type="date" name="tao" required ><br><br>
+                Thời gian kết thúc : <input type="datetime-local" name="ketthuc" required ><br><br>
+                Thời gian tạo : <input type="datetime-local" name="tao" required ><br><br>
                 <button>Ok</button>
             </form>
         </div>

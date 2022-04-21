@@ -72,7 +72,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        $data = dich_vu::find();
+        $data = dich_vu::find($id);
         return view('service_s.edit',compact('data'));
     }
 

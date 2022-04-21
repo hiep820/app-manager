@@ -22,11 +22,14 @@
                         </option>
                     @endforeach
                 </select><br>
-                Quyền: <input type="radio" name="tinhtrang" value = "0" @if ($listRoomForRest->tinh_trang== 0)
+                trạng thái: <input type="radio" name="tinhtrang" value = "0" @if ($listRoomForRest->tinh_trang== 0)
                     checked
                 @endif>Còn trống <input type="radio" name="tinhtrang" value = "1" @if ($listRoomForRest->tinh_trang== 1)
                 checked
-            @endif>Đang dùng <br>
+            @endif>Đang dùng <input type="radio" name="tinhtrang" value = "2" @if ($listRoomForRest->tinh_trang== 2)
+            checked
+        @endif>Cần dọn dẹp <br>
+<br>
 
 
                 <button>Cập nhật</button>

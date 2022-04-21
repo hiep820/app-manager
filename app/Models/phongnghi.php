@@ -23,6 +23,9 @@ class phongnghi extends Model
             return "đang dùng";
         } else if ($this->tinh_trang== 0){
             return "còn trống";
+        }else if ($this->tinh_trang== 2){
+            return "cần dọn dẹp ";
         }
+
     }
 }

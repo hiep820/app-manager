@@ -31,6 +31,9 @@
                             <option value=""selected>
                                 tất cả
                             </option>
+                            <option value="2" @if($trangthai==2) selected @endif>
+                                Cần dọn dẹp
+                            </option>
                             <option value="1" @if($trangthai==1) selected @endif>
                                 Đang dùng
                             </option>
